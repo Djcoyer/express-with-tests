@@ -1,0 +1,16 @@
+{
+  "name": "express-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "4.16.4",
+    "jest": "^23.6.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
