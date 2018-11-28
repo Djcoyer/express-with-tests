@@ -1,3 +1,5 @@
+const Exception = require('../models/Exception');
+
 class MessageService {
 
     constructor(repository) {
@@ -13,7 +15,10 @@ class MessageService {
     findOne(id) {
         if(typeof(id) === 'string')
             id = parseInt(id);
-        return this.repository.findOne(id);
+        let message =  this.repository.findOne(id);
+        if(!message)
+            throw new Exception(404, "No message found for specified ID");
+        return message;
     }
 
     //#endregion

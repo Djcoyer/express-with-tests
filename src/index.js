@@ -18,5 +18,4 @@ app.set(Dependencies.CONTEXT, container);
 app.use(bodypareser.json());
 
 messageController(app);
-
 app.listen(3000);

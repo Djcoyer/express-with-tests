@@ -1,4 +1,5 @@
 const MessageService = require('../src/services/MessageService');
+const Exception = require('../src/models/Exception');
 
 var messages = [
     {id: 1, message: "Hello, World!"},
@@ -15,7 +16,7 @@ var repository = {
         return messages;
     }),
     add: jest.fn((message) => {
-        return message;
+        return {...message, id: 4};
     })
 }
 
@@ -49,6 +50,19 @@ describe("Message Service", () => {
         expect(repository.findOne).toHaveBeenCalledTimes(1);
         expect(message).toBeTruthy();
         expect(messages).toContain(message);
+    });
+
+    it("Throws error when it cannot find message with ID", () => {
+        expect(() => messageService.findOne(5)).toThrow(Exception);
+        expect(repository.findOne).toHaveBeenCalledTimes(1);
+        expect(repository.findOne).toHaveBeenCalledWith(5);
+    });
+
+    it("Returns message on successful addition", () => {
+        let returnedMessage = messageService.add("Hello, Solar System!");
+        expect(returnedMessage).not.toBe(null);
+        expect(repository.add).toHaveBeenCalledTimes(1);
+        expect(returnedMessage.id).toEqual(4);
     });
 
 });
